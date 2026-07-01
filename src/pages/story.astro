@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Meridian',
+    url: 'https://meridian.coffee',
+    logo: 'https://meridian.coffee/logo.png',
+    sameAs: [],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Meridian',
+    url: 'https://meridian.coffee',
+    description: 'Coffee, at the edge of dawn.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://meridian.coffee' },
+      { '@type': 'ListItem', position: 2, name: 'Story', item: 'https://meridian.coffee/story' },
+    ],
+  },
+];
+---
+
+<Base
+  title="Our Story | Meridian Coffee"
+  description="Discover the founders, sourcing philosophy, and craft behind Meridian — a specialty coffee brand built on transparency and quality."
+  structuredData={structuredData}
+>
+  <article class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <span class="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-accent)]">The Meridian coffee story</span>
+    <h1 class="font-display mt-4 text-4xl leading-[1.02] md:text-5xl">The Meridian Story</h1>
+    <p class="mt-6 text-lg leading-relaxed muted-ink">
+      Meridian is a specialty coffee brand built by two obsessives who couldn't agree on a definition — so we built the brand around what we could prove instead of what we could claim.
+    </p>
+
+    <div class="mt-4 aspect-[16/9] w-full overflow-hidden border border-[var(--color-line)] hero-border">
+      <img
+        src="https://picsum.photos/seed/meridian-farm-hands/1600/900"
+        alt="Coffee cherries being hand-sorted at origin for Meridian's single-origin lots"
+        class="h-full w-full object-cover grayscale-[15%]"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+    </div>
+
+    <div class="prose-block mt-12 space-y-6 text-base leading-relaxed">
+      <h2 class="font-display text-2xl mt-2">Two people, one disagreement</h2>
+      <p class="muted-ink">
+        Before Meridian existed, our two founders worked on opposite ends of the same supply chain. One spent a decade as a green-coffee buyer, flying into Huila and Yirgacheffe twice a year to sit across the table from growers and negotiate prices that actually reflected the quality of the harvest. The other spent that same decade behind a roaster, chasing the narrow window where a bean stops tasting grassy and starts tasting like the place it grew.
+      </p>
+      <p class="muted-ink">
+        They met at a cupping table in 2024, disagreeing loudly about what "specialty coffee" should mean. One thought it meant traceability — a name, a farm, a price, written down. The other thought it meant the roast — the craft of drawing out a lot's particular sweetness without burying it under char. Meridian is the answer they landed on: both, always, on every bag.
+      </p>
+
+      <h2 class="font-display text-2xl mt-10">A sourcing philosophy we can defend</h2>
+      <p class="muted-ink">
+        We buy in small lots, directly from cooperatives and individual growers wherever we can reach them, and through vetted importers with long-standing farmer relationships everywhere else. Every lot we bring in gets three things printed on the bag: the farm or cooperative name, the altitude it grew at, and the price we paid per pound. If we can't get all three, we don't buy the lot — no matter how good it cups.
+      </p>
+      <p class="muted-ink">
+        This isn't a marketing gesture. Origin transparency is the single biggest lever we have for paying growers fairly, and it's the reason our launch lineup is smaller than most new roasters'. We'd rather launch with four honest origins than twelve vague ones.
+      </p>
+
+      <h2 class="font-display text-2xl mt-10">Roasting in batches small enough to taste the difference</h2>
+      <p class="muted-ink">
+        Every lot is roasted in batches under 20kg, profiled individually rather than run through a house curve built for volume. Our roaster tastes every batch against the green sample before it ships — if it doesn't match, it gets re-profiled, not shipped. Coffee is at its best within a few weeks of roasting, so we roast in small runs and ship within 72 hours, rather than warehousing bags for months the way larger brands do.
+      </p>
+      <p class="muted-ink">
+        We're building Meridian slowly, on purpose. Small-batch roasting and honest sourcing don't scale the way venture-backed coffee brands are used to scaling, and we're fine with that trade-off. We'd rather grow at the speed our relationships with growers can support.
+      </p>
+
+      <h2 class="font-display text-2xl mt-10">What launch day looks like</h2>
+      <p class="muted-ink">
+        When we launch, early-access subscribers get first access to our founding lineup, a discount on the first order, and founder notes on each origin — why we chose that farm, what the cupping notes actually taste like, and what we paid. If that sounds like the kind of specialty coffee brand you've been waiting for, join the list and we'll let you know the moment the first bags ship.
+      </p>
+    </div>
+
+    <div class="mt-14 flex flex-wrap items-center gap-6 border-t border-[var(--color-line)] section-border pt-10">
+      <a href="/#signup" class="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-medium text-[#fbf6ee] transition hover:bg-[var(--color-accent-dim)] hover:-translate-y-0.5">
+        Join the early list
+      </a>
+      <a href="/privacy-policy" class="text-sm font-medium underline decoration-[var(--color-line)] underline-offset-4 transition hover:decoration-[var(--color-accent)]">
+        Read our privacy policy →
+      </a>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .muted-ink { color: var(--color-ink-muted); }
+  :global(body.theme-dark) .muted-ink { color: var(--color-dark-ink-muted); }
+  .hero-border { border-color: var(--color-line); }
+  :global(body.theme-dark) .hero-border { border-color: var(--color-dark-line); }
+  .section-border { border-color: var(--color-line); }
+  :global(body.theme-dark) .section-border { border-color: var(--color-dark-line); }
+</style>

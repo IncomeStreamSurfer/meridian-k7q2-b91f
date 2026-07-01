@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Meridian',
+  url: 'https://meridian.coffee',
+  description: 'Coffee, at the edge of dawn.',
+};
+---
+
+<Base
+  title="Thank You | Meridian Coffee"
+  description="Thanks for joining Meridian's early access list — we'll be in touch soon with launch details and exclusive offers."
+  structuredData={structuredData}
+  noindex={true}
+>
+  <section class="mx-auto flex max-w-2xl flex-col items-center px-6 py-24 text-center md:py-32">
+    <span class="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-accent)]">Confirmed</span>
+    <h1 class="font-display mt-4 text-4xl leading-[1.05] md:text-5xl">You're on the List</h1>
+    <p class="mt-6 max-w-md text-lg leading-relaxed muted-ink">
+      Thanks for joining Meridian's early access list. Keep an eye on your inbox — we'll send our launch date, a first-batch discount code, and founder notes on each origin before anyone else hears about them.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-6">
+      <a href="/story" class="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-medium text-[#fbf6ee] transition hover:bg-[var(--color-accent-dim)] hover:-translate-y-0.5">
+        Read the Meridian story
+      </a>
+      <a href="/" class="text-sm font-medium underline decoration-[var(--color-line)] underline-offset-4 transition hover:decoration-[var(--color-accent)]">
+        Back to home →
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .muted-ink { color: var(--color-ink-muted); }
+  :global(body.theme-dark) .muted-ink { color: var(--color-dark-ink-muted); }
+</style>

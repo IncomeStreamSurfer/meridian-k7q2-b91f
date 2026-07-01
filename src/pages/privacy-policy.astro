@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Meridian',
+  url: 'https://meridian.coffee',
+  description: 'Coffee, at the edge of dawn.',
+};
+
+const year = 2026;
+---
+
+<Base
+  title="Privacy Policy | Meridian Coffee"
+  description="Read Meridian's privacy policy covering how we collect, store, and use your email address when you sign up for launch updates."
+  structuredData={structuredData}
+>
+  <article class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <span class="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-accent)]">Legal</span>
+    <h1 class="font-display mt-4 text-4xl leading-[1.05] md:text-5xl">Privacy Policy</h1>
+    <p class="mt-4 text-sm muted-ink">Last updated {year}</p>
+
+    <div class="prose-block mt-10 space-y-6 text-base leading-relaxed muted-ink">
+      <p>
+        Meridian ("we", "us") respects your privacy. This policy explains what information we collect when you join our early access list at meridian.coffee, why we collect it, and how it's stored.
+      </p>
+
+      <h2 class="font-display text-xl text-[var(--color-ink)] dark-ink mt-8">What we collect</h2>
+      <p>
+        When you submit the email signup form on our homepage, we collect the email address you provide and the IP address your request came from, which we use only for spam and abuse prevention. We do not collect names, payment details, or any other personal information at this stage — Meridian hasn't launched yet, so there's nothing else to collect.
+      </p>
+
+      <h2 class="font-display text-xl text-[var(--color-ink)] dark-ink mt-8">How we store it</h2>
+      <p>
+        Your email address is stored in a Supabase-hosted Postgres database with row-level security enabled. Our database policies allow new signups to be inserted but do not expose any signup's data to public, unauthenticated read access. Only Meridian's founders can view the list of subscribers.
+      </p>
+
+      <h2 class="font-display text-xl text-[var(--color-ink)] dark-ink mt-8">How we use it</h2>
+      <p>
+        We use your email address to send you updates about Meridian's launch: our launch date, a first-batch discount code, and founder notes about the coffees we're bringing to market. We send these updates ourselves via Resend, a transactional email provider — we do not sell, rent, or share your email address with any third party for marketing purposes.
+      </p>
+
+      <h2 class="font-display text-xl text-[var(--color-ink)] dark-ink mt-8">Your rights</h2>
+      <p>
+        You can ask us to remove your email address from our list at any time by replying to any email we send you, or by contacting us directly. We will remove your information within a reasonable timeframe and will not send further communications once you've asked to be removed.
+      </p>
+
+      <h2 class="font-display text-xl text-[var(--color-ink)] dark-ink mt-8">Cookies and tracking</h2>
+      <p>
+        This site stores a single local preference in your browser (your dark/light theme choice) using localStorage — this never leaves your device and isn't sent to us. We don't currently use analytics cookies or third-party trackers.
+      </p>
+
+      <h2 class="font-display text-xl text-[var(--color-ink)] dark-ink mt-8">Changes to this policy</h2>
+      <p>
+        As Meridian moves from coming-soon to fully launched, this policy will be updated to reflect new data practices (such as order and shipping information). We'll note the "last updated" date above whenever changes are made.
+      </p>
+
+      <p class="mt-8">
+        Questions about this policy? Return to the <a href="/" class="underline decoration-[var(--color-line)] underline-offset-4 hover:decoration-[var(--color-accent)]">Meridian homepage</a> or reach out via the contact details we'll publish at launch.
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .muted-ink { color: var(--color-ink-muted); }
+  :global(body.theme-dark) .muted-ink { color: var(--color-dark-ink-muted); }
+  .dark-ink { color: var(--color-ink); }
+  :global(body.theme-dark) .dark-ink { color: var(--color-dark-ink); }
+</style>
