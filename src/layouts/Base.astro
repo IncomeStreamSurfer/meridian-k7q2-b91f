@@ -1,0 +1,138 @@
+---
+import SEOHead from '../components/SEOHead.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  structuredData?: object | object[];
+  noindex?: boolean;
+}
+
+const { title, description, structuredData, noindex } = Astro.props;
+const year = 2026;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEOHead title={title} description={description} structuredData={structuredData} noindex={noindex} />
+    <script is:inline>
+      // Avoid theme flash — read stored preference before paint.
+      (function () {
+        try {
+          const stored = localStorage.getItem('meridian-theme');
+          const theme = stored === 'light' ? 'light' : 'dark';
+          if (theme === 'dark') document.documentElement.classList.add('theme-dark-html');
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      html.theme-dark-html body { background-color: #14110d; color: #f3ede1; }
+    </style>
+  </head>
+  <body class="font-body">
+    <header class="sticky top-0 z-40 border-b border-[var(--color-line)] backdrop-blur supports-[backdrop-filter]:bg-[var(--color-paper)]/80 dark-header">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+        <a href="/" class="font-display text-xl tracking-tight" aria-label="Meridian home">Meridian</a>
+        <nav class="hidden items-center gap-8 text-sm md:flex">
+          <a href="/#story" class="hover:text-[var(--color-accent)] transition">Story</a>
+          <a href="/#signup" class="hover:text-[var(--color-accent)] transition">Join the list</a>
+          <a href="/story" class="hover:text-[var(--color-accent)] transition">Read more</a>
+        </nav>
+        <button
+          id="theme-toggle"
+          type="button"
+          aria-label="Toggle dark and light mode"
+          class="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-line)] transition hover:border-[var(--color-accent)]"
+        >
+          <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="hidden">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="border-t border-[var(--color-line)] mt-24">
+      <div class="mx-auto max-w-6xl px-6 py-14">
+        <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          <div class="max-w-sm">
+            <p class="font-display text-lg">Meridian</p>
+            <p class="mt-2 text-sm text-[var(--color-ink-muted)] footer-muted">Specialty coffee, roasted in small batches, sourced with names attached. Launching soon.</p>
+          </div>
+          <div class="flex gap-12 text-sm">
+            <div class="flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-wide text-[var(--color-ink-muted)] footer-muted">Site</span>
+              <a href="/" class="hover:text-[var(--color-accent)] transition">Home</a>
+              <a href="/story" class="hover:text-[var(--color-accent)] transition">Our story</a>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-wide text-[var(--color-ink-muted)] footer-muted">Legal</span>
+              <a href="/privacy-policy" class="hover:text-[var(--color-accent)] transition">Privacy policy</a>
+            </div>
+          </div>
+        </div>
+        <p class="mt-10 text-xs text-[var(--color-ink-muted)] footer-muted">© {year} Meridian Coffee. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        const root = document.documentElement;
+        const body = document.body;
+        const toggle = document.getElementById('theme-toggle');
+        const sun = document.getElementById('icon-sun');
+        const moon = document.getElementById('icon-moon');
+
+        function applyTheme(theme) {
+          if (theme === 'dark') {
+            body.classList.add('theme-dark');
+            root.classList.add('theme-dark-html');
+            sun?.classList.remove('hidden');
+            moon?.classList.add('hidden');
+          } else {
+            body.classList.remove('theme-dark');
+            root.classList.remove('theme-dark-html');
+            sun?.classList.add('hidden');
+            moon?.classList.remove('hidden');
+          }
+          try { localStorage.setItem('meridian-theme', theme); } catch (e) {}
+        }
+
+        let current = 'dark';
+        try {
+          current = localStorage.getItem('meridian-theme') === 'light' ? 'light' : 'dark';
+        } catch (e) {}
+        applyTheme(current);
+
+        toggle?.addEventListener('click', function () {
+          current = current === 'dark' ? 'light' : 'dark';
+          applyTheme(current);
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style>
+  .dark-header {
+    background-color: color-mix(in srgb, var(--color-paper) 80%, transparent);
+  }
+  :global(body.theme-dark) .dark-header {
+    background-color: color-mix(in srgb, var(--color-dark-bg) 80%, transparent);
+    border-color: var(--color-dark-line);
+  }
+  :global(body.theme-dark) .footer-muted {
+    color: var(--color-dark-ink-muted);
+  }
+  :global(body.theme-dark) footer {
+    border-color: var(--color-dark-line);
+  }
+</style>
